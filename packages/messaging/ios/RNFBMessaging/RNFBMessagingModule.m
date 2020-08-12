@@ -19,6 +19,7 @@
 #import <React/RCTUtils.h>
 #import <React/RCTConvert.h>
 #import <RNFBApp/RNFBSharedUtils.h>
+#import <RNFBApp/RNFBRCTEventEmitter.h>
 
 #import "RNFBMessagingModule.h"
 #import "RNFBMessagingSerializer.h"
@@ -322,6 +323,17 @@ RCT_EXPORT_METHOD(unsubscribeFromTopic:
       resolve(nil);
     }
   }];
+}
+
+RCT_EXPORT_METHOD(getBackgroundMessage) {
+  NSUserDefaults *sharedDefault = [[NSUserDefaults alloc] initWithSuiteName:@"group.io.gigasource.notification"];
+  NSMutableArray *messArray = [NSMutableArray arrayWithArray:[sharedDefault objectForKey:@"notifications"]];
+  for (NSString *message in messArray) {
+    [[RNFBRCTEventEmitter shared] sendEventWithName:@"messaging_message_received_background" body:@{
+        @"data": message
+    }];
+  }
+  [sharedDefault setObject:nil forKey:@"notifications"];
 }
 
 @end

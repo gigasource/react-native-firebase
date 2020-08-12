@@ -379,6 +379,10 @@ class FirebaseMessagingModule extends FirebaseModule {
       'firebase.messaging().usePublicVapidKey() is not supported on react-native-firebase.',
     );
   }
+
+  getBackgroundMessage() {
+    return isIOS ? this.native.getBackgroundMessage() : null;
+  }
 }
 
 // import { SDK_VERSION } from '@react-native-firebase/messaging';
