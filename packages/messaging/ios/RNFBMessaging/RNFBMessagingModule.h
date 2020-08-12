@@ -19,6 +19,8 @@
 #import <React/RCTBridgeModule.h>
 
 
-@interface RNFBMessagingModule : NSObject <RCTBridgeModule>
+@interface RNFBMessagingModule : NSObject <RCTBridgeModule> {
+    NSString *appGroup;
+}
 
 @end

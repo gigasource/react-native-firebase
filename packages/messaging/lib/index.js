@@ -383,6 +383,10 @@ class FirebaseMessagingModule extends FirebaseModule {
   getBackgroundMessage() {
     return isIOS ? this.native.getBackgroundMessage() : null;
   }
+
+  setAppGroup(appGroupName) {
+    return isIOS ? this.native.setAppGroup(appGroupName) : null;
+  }
 }
 
 // import { SDK_VERSION } from '@react-native-firebase/messaging';

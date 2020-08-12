@@ -336,4 +336,9 @@ RCT_EXPORT_METHOD(getBackgroundMessage) {
   [sharedDefault setObject:nil forKey:@"notifications"];
 }
 
+RCT_EXPORT_METHOD(setAppGroup:
+  (NSString *) newAppGroup) {
+    appGroup = newAppGroup;
+}
+
 @end
