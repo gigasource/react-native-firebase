@@ -328,9 +328,9 @@ RCT_EXPORT_METHOD(unsubscribeFromTopic:
 RCT_EXPORT_METHOD(getBackgroundMessage) {
   NSUserDefaults *sharedDefault = [[NSUserDefaults alloc] initWithSuiteName:@"group.io.gigasource.notification"];
   NSMutableArray *messArray = [NSMutableArray arrayWithArray:[sharedDefault objectForKey:@"notifications"]];
-  for (NSString *message in messArray) {
+  for (NSDictionary *message in messArray) {
     [[RNFBRCTEventEmitter shared] sendEventWithName:@"messaging_message_received_background" body:@{
-        @"data": message
+        @"data": [RNFBMessagingSerializer remoteMessageUserInfoToDict:message]
     }];
   }
   [sharedDefault setObject:nil forKey:@"notifications"];
